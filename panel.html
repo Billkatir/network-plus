@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="panel.css">
+</head>
+<body>
+  <div id="toolbar">
+    <button id="clearBtn" title="Clear list">&#128465; Clear</button>
+    <button id="captureDocsBtn" title="Capture the rendered HTML of the page + iframes so server-rendered values are searchable">&#128196; Grab docs</button>
+    <label class="toggle" title="Keep the list across page reloads / navigation">
+      <input type="checkbox" id="preserveLog"> Preserve log
+    </label>
+    <span class="sep"></span>
+    <input type="text" id="search" placeholder="Search URL, headers, params…">
+    <label class="toggle" title="Also search inside response bodies (fetches bodies on demand)">
+      <input type="checkbox" id="deepSearch"> Deep (bodies)
+    </label>
+    <label class="toggle" title="Treat search as a regular expression">
+      <input type="checkbox" id="regexSearch"> Regex
+    </label>
+    <span class="sep"></span>
+    <button id="exportBtn" title="Export captured requests">Export &#9662;</button>
+    <span id="matchCount"></span>
+  </div>
+
+  <div id="main">
+    <div id="listPane">
+      <table id="reqTable">
+        <thead>
+          <tr>
+            <th class="col-method">Method</th>
+            <th class="col-status">Status</th>
+            <th class="col-type">Type</th>
+            <th class="col-url">URL</th>
+          </tr>
+        </thead>
+        <tbody id="reqBody"></tbody>
+      </table>
+    </div>
+    <div id="detailPane" class="hidden">
+      <div id="detailHeader">
+        <span id="detailTitle"></span>
+        <button id="closeDetail" title="Close">&#10005;</button>
+      </div>
+      <div id="detailBody"></div>
+    </div>
+  </div>
+
+  <!-- context menu for right-click on a request -->
+  <div id="ctxMenu" class="hidden">
+    <div class="ctx-item" data-action="python-requests">Copy as Python (requests)</div>
+    <div class="ctx-item" data-action="python-pipeline">Copy as Python pipeline (with deps)</div>
+    <div class="ctx-item" data-action="python-save">Export as Python file…</div>
+    <div class="ctx-item" data-action="copy-curl">Copy as cURL</div>
+  </div>
+
+  <script src="panel.js"></script>
+</body>
+</html>
